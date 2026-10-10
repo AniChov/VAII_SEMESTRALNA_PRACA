@@ -108,7 +108,6 @@ Anna Mária Chovancová
 Pomocné tabuľky budú uchovávať priradenia medzi obsahom, postavami a fázami hry. Takto bude možné spravovať informácie a dôkazy bez vytvárania ich zbytočných kópií.
 
 ## Hlavné stránky aplikácie
-Uveďte zoznam najdôležitejších stránok (min. 5) alebo obrazoviek aplikácie a stručne popíšte ich účel. Nie je potrebné pripravovať kompletný grafický návrh, postačuje základná predstava o štruktúre používateľského rozhrania.
 1. Hlavná stránka = predstaví aplikáciu a možnosť prihlásenia alebo registrácie
 2. Registrácia a prihlásenie = umožní užívateľovi vytvoriť si účet a bezpečne sa prihlásiť
 3. Prehľad projektov = zobrazí vlastné hry, ich stav a základné údaje. Umožní vytvoriť novú hru alebo pokračovať v existujúcom projekte.
@@ -120,7 +119,6 @@ Uveďte zoznam najdôležitejších stránok (min. 5) alebo obrazoviek aplikáci
 9. Príprava a export materiálov = spracuje informácie do materiálov ktoré bude možné exportovať ako PDF a tlačiť.
 
 ## Rozdelenie funkcionality
-Rozdeľte plánované funkcie na základné a rozširujúce. Základné funkcie predstavujú minimum potrebné na úspešné dokončenie projektu, zatiaľ čo rozširujúce funkcie môžu byť implementované navyše podľa Vašich časových možností.
 Základné funkcie:
    - registrácia, prihlásenie a odhlásenie používateľa
    - rozlišovanie používateľských rolí a kontrola oprávnení
