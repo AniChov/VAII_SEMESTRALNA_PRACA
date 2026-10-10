@@ -28,7 +28,7 @@ Anna Mária Chovancová
    - zobrazí a upraví zoznam svojich projektov
    - vytvorí si nový murder mystery projekt
    - vyplní základné informácie murder mystery projektu
-   - pridá postavu alebo zoznám postáv hráčov
+   - pridá postavu alebo zoznam postáv hráčov
    - vytvorí si charakteristiky postáv
    - pridá nehrateľné postavy
    - vytvorí vzťahy medzi postavami
@@ -63,7 +63,6 @@ Anna Mária Chovancová
    - Účel: Slúži ako základ pre vytvorenie charakteristiky postavy a ďalších materiálov pre konkrétneho hráča.
 
 4. Fáza hry (GamePhase)
-
    - Predstavuje jednu časť priebehu hry, v ktorej majú hráči prístup k určitému obsahu.
    - Hlavné atribúty: ID_fázy, ID_projektu, názov, opis, poradie a prípadné podmienky sprístupnenia.
    - Účel: Umožňuje rozdeliť hru na jednotlivé fázy a spravovať obsah dostupný v každej z nich. Autor môže napríklad vytvoriť fázu prípravy pred hrou, úvodnú fázu a viacero fáz postupného odhaľovania dôkazov.
@@ -74,7 +73,7 @@ Anna Mária Chovancová
    - Účel: Umožňuje vytvárať a spravovať obsah, ktorý sa následne priraďuje k postavám a fázam hry.
 
 6. Dôkaz (Clue)
-   - Predstavuje stopu alebo dôkaz, ktorý pomáha hráčom riešiť záhadu.
+   - Predstavuje stopu alebo dôkaz, ktorý pomáha hráčom riešiť záhadu.samostatná stopa, dokument, predmet, fotografia alebo iný herný materiál, ktorý hráč môže preskúmať.
    - Hlavné atribúty: ID_dôkazu, ID_projektu, názov, opis a prípadný odkaz na priložený súbor.
    - Účel: Umožňuje vytvárať a spravovať dôkazy a určovať, kedy a ktorým postavám budú dostupné.
 
@@ -86,13 +85,18 @@ Anna Mária Chovancová
 8. Priradenie obsahu (napríklad InformationAssignment a ClueAssignment)
    - Pomocné databázové tabuľky umožňujúce priraďovať informácie a dôkazy postavám a fázam hry.
    - Hlavné atribúty: ID_priradenia, ID_informácie alebo ID_dôkazu, ID_postavy, ID_fázy a prípadné doplňujúce údaje o sprístupnení.
-   - Účel: Umožňujú určiť, ktorá postava dostane konkrétnu informáciu alebo dôkaz a v ktorej fáze hry. Jeden dôkaz alebo jedna informácia môžu byť priradené viacerým postavám. Obsah určený všetkým hráčom môže byť označený osobitne.
+   - Účel: Umožňujú určiť, ktorá postava dostane konkrétnu informáciu alebo dôkaz a v ktorej fáze hry. Jeden dôkaz alebo jedna informácia môžu byť priradené viacerým postavám. Obsah určený všetkým hráčom môže byť označený osobitne. InformationAssignment a ClueAssignment spájajú konkrétny obsah s postavou a fázou hry.
 
 9. Súbor (ProjectFile)
    - Predstavuje súbor nahraný k hernému projektu.
    - Hlavné atribúty: ID_súboru, ID_projektu, názov, typ súboru, cesta k súboru a dátum nahrania.
    - Účel: Umožňuje spravovať obrázky dôkazov, zvukové nahrávky a ďalšie súbory potrebné na prípravu hry.
 
+10. Nahlasovač Chýb (BugReport)
+    - Predstavuje hlásenie chyby, problému s ktorým sa používateľ stretol a predostrel ju správcovi.
+    - Hlavné atribúty: ID_problému, ID_používateľa, predmet, opis, dátum vytvorenia a stav vybavenia.
+    - Účel: Umožnuje oznámiť chybu v systéme správcovi na jej nasledovné opravenie.
+   
 ## Vzťahy medzi entitami
    - Používateľ – Projekt (1:N): Jeden používateľ môže vlastniť viacero hier, každá hra má v základnej verzii jedného vlastníka.
    - Projekt – Postava (1:N): Jedna hra obsahuje viacero postáv.
@@ -130,11 +134,11 @@ Základné funkcie:
    - určovanie fázy, v ktorej sa konkrétna informácia alebo dôkaz sprístupní
    - možnosť pridať alebo odstrániť informácie a dôkazy z konkrétnej fázy
    - tvorba materiálov pre jednotlivé postavy a organizačných podkladov pre autora
-   - tlač a jednoduchý export pripravených materiálov prostredníctvom prehliadača
+   - tlač a jednoduchý export pripravených materiálov na PDF prostredníctvom tlačovej funkcie prehliadača
    - nahrávanie a správa súborov
    - aspoň dve významné AJAX operácie, napríklad asynchrónne priradenie informácie k postave a filtrovanie obsahu podľa fázy hry
    - validácia údajov na strane klienta aj servera, bezpečné databázové dopyty a ochrana prístupu k súkromným projektom
-   - responzívne používateľské rozhranie a príprava demo údajov pre spustenie aplikácie v Dockeri.
+   - responzívne používateľské rozhranie a príprava demo údajov pre spustenie aplikácie v Dockeri
 
 Rozširujúce funkcie:
    - vlastné typy entít a polí: Autor si môže vytvoriť vlastné kategórie údajov, napríklad predmety, jedlo alebo podozrivé objekty, a určiť ich atribúty
