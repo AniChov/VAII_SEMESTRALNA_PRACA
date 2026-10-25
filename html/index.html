@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="sk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JeToJASne Studio</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body class="projects-page">
+        <header class="site-header">
+            <a class="brand" href="index.html">
+                <span class="logo">LOGO</span>
+                <h1>JeToJASne Studio</h1>
+            </a>
+
+            <button class="user-button" type="button" aria-label="Používateľský účet">
+                A
+            </button>
+        </header>
+
+        <input
+        type="checkbox"
+        id="sidebar-toggle"
+        class="sidebar-toggle"
+        aria-label="Skryť bočný panel"
+        aria-controls="bocny-panel"
+        >
+
+        <div class="page-toolbar">
+        <label for="sidebar-toggle" class="sidebar-toggle-label">☰ Menu a filtre</label>
+    </div>
+
+        <div class="layout">
+            <aside class="sidebar" id="bocny-panel">
+                <nav aria-label="Hlavná navigácia">
+                    <a href="index.html" aria-current="page">Moje projekty</a>
+                </nav>
+
+                <form class="filters">
+                    <h2>Filtre projektov</h2>
+
+                    <fieldset>
+                        <legend>Stav projektu</legend>
+
+                        <label>
+                            <input type="radio" name="stav" value="vsetky" checked>
+                            Všetky
+                        </label>
+
+                        <label>
+                            <input type="radio" name="stav" value="rozpracovane">
+                            Rozpracované
+                        </label>
+
+                        <label>
+                            <input type="radio" name="stav" value="dokoncene">
+                            Dokončené
+                        </label>
+                    </fieldset>
+
+                    <label for="zaner">Žáner</label>
+                    <select id="zaner" name="zaner">
+                        <option value="">Všetky žánre</option>
+                        <option value="zahada">Záhada</option>
+                        <option value="thriller">Thriller</option>
+                        <option value="komedia">Komédia</option>
+                    </select>
+
+                    <label for="pocet-hracov">Počet hráčov</label>
+                    <input
+                    type="number"
+                    id="pocet-hracov"
+                    name="pocet-hracov"
+                    min="1"
+                    placeholder="4"
+                    >
+
+                    <button type="reset">Zrušiť filtre</button>
+                </form>
+            </aside>
+
+            <main>
+                <section class="placeholder">
+                    <h2>Priestor pre obsah stránky</h2>
+                    <p>Tu sa bude zobrazovať obsah aplikácie.</p>
+
+                    <a class="button" href="hra.html">
+                        Otvoriť ukážku hry
+                    </a>
+                </section>
+            </main>
+        </div>
+    </body>
+</html>
