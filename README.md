@@ -147,3 +147,39 @@ Rozširujúce funkcie:
    - katalóg hier: Vyhľadávanie a prehliadanie verejne dostupných scenárov
    - spolupráca viacerých autorov: Pozývanie ďalších používateľov k projektu s oprávnením na úpravu alebo iba prezeranie obsahu.
    - komentáre a história zmien: Zaznamenávanie poznámok a zmien v hernom scenári.
+
+## Aktuálny stav implementácie
+
+Aplikácia využíva PHP framework [Vaííčko](https://github.com/thevajko/vaiicko). Aktuálne je implementované spoločné rozloženie, úvodná stránka a statický prehľad hry „Vražda na chate“. Navigácia medzi stránkami funguje a rozloženie je responzívne.
+
+Prihlasovanie, databáza, ukladanie, filtrovanie a export zatiaľ nie sú implementované. Funkcie opísané vyššie predstavujú plán výslednej aplikácie.
+
+## Štruktúra projektu
+
+- `App/` – kontroléry, pohľady a spoločné rozloženie aplikácie.
+- `Framework/` – zdrojový kód frameworku Vaííčko.
+- `public/` – verejný koreň aplikácie, CSS a ďalšie statické súbory.
+- `docker/` – konfigurácia lokálneho vývojového prostredia.
+- `html/` – pôvodná statická HTML a CSS implementácia.
+
+## Lokálne spustenie cez Docker
+
+1. Nainštalujte a spustite Docker Desktop.
+2. Stiahnite alebo naklonujte repozitár.
+3. V termináli prejdite do koreňového priečinka repozitára.
+4. Spustite webový server:
+
+   ```bash
+   docker compose -f docker/docker-compose.yml up -d web
+   ```
+
+5. Otvorte aplikáciu na adrese [http://localhost/](http://localhost/).
+6. Prehľad hry otvoríte tlačidlom „Otvoriť ukážku hry“.
+
+Na zastavenie prostredia použite:
+
+```bash
+docker compose -f docker/docker-compose.yml down
+```
+
+Aktuálna statická verzia aplikácie nevyžaduje databázu. Pri použití iného PHP servera nastavte jeho verejný koreň na priečinok `public`.
