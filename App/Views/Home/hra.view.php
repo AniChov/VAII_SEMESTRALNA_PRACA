@@ -1,0 +1,534 @@
+<?php
+/** @var \Framework\Support\LinkGenerator $link */
+?>
+
+<input
+        type="checkbox"
+        id="sidebar-toggle"
+        class="sidebar-toggle"
+        aria-label="Skryť bočný panel"
+>
+
+<label for="sidebar-toggle" class="sidebar-toggle-label">
+☰ Menu a filtre
+</label>
+
+<div class="layout">
+    <aside class="sidebar">
+        <nav aria-label="Navigácia projektu">
+            <a href="<?= $link->url('home.index') ?>">← Späť na projekty</a>
+            <a href="<?= $link->url('home.hra') ?>" aria-current="page">
+                Prehľad hry
+            </a>            <a href="#postavy">Postavy</a>
+            <a href="#pribeh">Príbeh</a>
+            <a href="#materialy">Materiály</a>
+            <a href="#fazy">Fázy hry</a>
+        </nav>
+        <form class="filters">
+            <h2>Filtre obsahu</h2>
+
+            <label for="hladanie">Hľadať v projekte</label>
+            <input
+                    type="search"
+                    id="hladanie"
+                    name="hladanie"
+                    placeholder="Názov alebo text…"
+                        >
+
+            <label for="typ-obsahu">Typ obsahu</label>
+            <select id="typ-obsahu" name="typ-obsahu">
+                <option value="">Všetky typy</option>
+                <option value="informacia">Informácie</option>
+                <option value="uloha">Úlohy postáv</option>
+                <option value="dokaz">Dôkazy</option>
+                <option value="pomocka">Pomôcky</option>
+                <option value="podozrenie">Podozrenia</option>
+            </select>
+
+            <label for="filter-postavy">Priradená postava</label>
+            <select id="filter-postavy" name="postava">
+                <option value="">Všetky postavy</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="red">Red</option>
+                <option value="yellow">Yellow</option>
+            </select>
+
+            <label class="filter-checkbox">
+                <input type="checkbox" name="nepriradene">
+    Iba nepriradené
+</label>
+
+            <button type="reset">Zrušiť filtre</button>
+        </form>
+    </aside>
+
+    <main>
+        <section class="project-heading">
+            <div>
+                <h2>Vražda na chate</h2>
+                <span class="project-status">Rozpracovaný</span>
+            </div>
+
+            <div class="project-actions">
+                <details class="add-menu">
+                    <summary>Pridať</summary>
+
+                    <div class="add-menu-content">
+                        <a href="#postavy">Postavu</a>
+                        <a href="#npc">NPC postavu</a>
+                        <a href="#fazy">Fázu hry</a>
+                        <a href="#materialy">Informáciu</a>
+                        <a href="#materialy">Dôkaz</a>
+                        <a href="#materialy">Pomôcku</a>
+                        <a href="#todo">Úlohu na dokončenie</a>
+                    </div>
+                </details>
+                <button type="button">Uložiť</button>
+                <button type="button">Označiť ako dokončený</button>
+                <button type="button">Exportovať</button>
+            </div>
+        </section>
+
+        <section class="panel" id="fazy">
+            <div class="section-heading">
+                <h2>Fázy hry</h2>
+                <button class="secondary-button" type="button">
+    + Pridať fázu
+</button>
+            </div>
+
+            <fieldset class="phase-options">
+                <legend>Zobraziť obsah pre fázu:</legend>
+
+                <label class="phase-option">
+                    <input type="radio" name="faza" value="cela-hra" checked>
+Celá hra
+</label>
+
+                <label class="phase-option">
+                    <input type="radio" name="faza" value="priprava">
+    Príprava
+                </label>
+
+                <label class="phase-option">
+                    <input type="radio" name="faza" value="uvod">
+    Úvod
+                </label>
+
+                <label class="phase-option">
+                    <input type="radio" name="faza" value="prva-stopa">
+    Prvá stopa
+</label>
+
+                <label class="phase-option">
+                    <input type="radio" name="faza" value="odhalenie">
+    Odhalenie
+                </label>
+            </fieldset>
+        </section>
+
+        <div class="editor-layout">
+            <div class="editor-content">
+            <section class="panel" id="postavy">
+                <div class="section-heading">
+                    <h2>Hrateľné postavy (4)</h2>
+                    <button class="button" type="button">+ Postava</button>
+                </div>
+
+                <div class="character-grid">
+                    <article class="character-card">
+                        <div class="character-image" aria-hidden="true">G</div>
+
+                        <div class="character-content">
+                            <h3>Green</h3>
+                            <p>Pokojný a rozvážny. Snaží sa odhaliť pravdu.</p>                        </div>
+                    </article>
+
+                    <article class="character-card">
+                        <div class="character-image" aria-hidden="true">B</div>
+
+                        <div class="character-content">
+                            <h3>Blue</h3>
+                            <p>Analytická a pozorná. Všíma si malé detaily.</p>
+                        </div>
+                    </article>
+
+                    <article class="character-card">
+                        <div class="character-image" aria-hidden="true">R</div>
+
+                        <div class="character-content">
+                            <h3>Red</h3>
+                            <p>Impulzívny a emotívny. Koná na prvý dojem.</p>
+                        </div>
+                    </article>
+
+                    <article class="character-card">
+                        <div class="character-image" aria-hidden="true">Y</div>
+
+                        <div class="character-content">
+                            <h3>Yellow</h3>
+                            <p>Spoločenská a zvedavá. Má zmysel pre humor.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <div class="two-columns">
+                <section class="panel" id="npc">
+                    <div class="section-heading">
+                        <h2>NPC postavy (1)</h2>
+                        <button class="button" type="button">+ NPC</button>
+                    </div>
+
+                    <h3>Janka</h3>
+                    <p>Organizátorka výletu a sestra Yellow.</p>
+
+                    <button class="secondary-button" type="button">
+    Upraviť postavu
+</button>
+                </section>
+
+                <section class="panel" id="hostitel">
+                    <div class="section-heading">
+                        <h2>Hostiteľ / moderátor</h2>
+                    </div>
+
+                    <p>
+Vedie hru, vysvetľuje pravidlá a postupne
+                        sprístupňuje hráčom pripravené dôkazy.
+                    </p>
+
+                    <button class="secondary-button" type="button">
+    Upraviť pokyny
+</button>
+                </section>
+
+            </div>
+            <section class="panel" id="pribeh">
+                <div class="section-heading">
+                    <h2>Príbeh</h2>
+                    <button class="secondary-button" type="button">
+    Upraviť príbeh
+</button>
+                </div>
+
+                <p>
+Štyria priatelia prichádzajú na víkend do odľahlej horskej chaty. Ich už i tak chaotický pobyt naruší nález ich kamarátky Janky bez známok života.
+                </p>
+
+                <p>
+Blížiaca sa búrka ich odreže od pomoci. Kým dorazí polícia, musia porovnať svoje výpovede, preskúmať dôkazy a zistiť, čo sa skutočne stalo. Každý však ukrýva vlastné tajomstvo.
+                </p>
+            </section>
+            <div class="two-columns">
+                <section class="panel" id="opis-hry">
+                    <div class="section-heading">
+                        <h2>Opis hry</h2>
+                        <button class="secondary-button" type="button">
+    Upraviť údaje
+</button>
+                    </div>
+
+                    <dl class="game-details">
+                        <dt>Počet hráčov:</dt>
+                        <dd>4</dd>
+
+                        <dt>Predpokladané trvanie:</dt>
+                        <dd>120 minút</dd>
+
+                        <dt>Prostredie:</dt>
+                        <dd>Horská chata a okolitý les</dd>
+
+                        <dt>Žáner:</dt>
+                        <dd>Detektívna záhada</dd>
+                    </dl>
+                </section>
+
+                <section class="panel" id="pravidla">
+                    <div class="section-heading">
+                        <h2>Pravidlá</h2>
+                        <button class="secondary-button" type="button">
+    Upraviť pravidlá
+</button>
+                    </div>
+
+                    <ol class="rules-list">
+                        <li>Prečítaj si materiály svojej postavy.</li>
+                        <li>
+Tajné materiály iných hráčov nečítaj
+                            bez ich súhlasu.
+                        </li>
+                        <li>
+Nové dôkazy otvárajte podľa pokynov
+                            moderátora.
+                        </li>
+                        <li>
+Na konci hry každý predstaví svoju
+                            teóriu o priebehu udalostí.
+                        </li>
+                    </ol>
+                </section>
+            </div>
+                <section class="panel" id="materialy">
+                    <div class="section-heading">
+                        <h2>Materiály hry</h2>
+
+                        <details class="add-menu">
+                            <summary>Pridať</summary>
+
+                            <div class="add-menu-content">
+                                <button type="button">Informácia</button>
+                                <button type="button">Úloha</button>
+                                <button type="button">Dôkaz</button>
+                                <button type="button">Pomôcka</button>
+                                <button type="button">Podozrenie</button>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="materials-grid">
+
+                        <details class="material">
+                            <summary>Informácie a úlohy</summary>
+
+                            <div class="material-content">
+                                <details class="material-item">
+                                    <summary>Tajný rozhovor</summary>
+
+                                    <div class="item-description">
+                                        <p>
+Yellow počula Janku telefonovať.
+Spomenula stretnutie pri lese.
+                                        </p>
+
+                                        <p><strong>Typ:</strong> Informácia</p>
+                                        <p><strong>Postava:</strong> Yellow</p>
+                                        <p><strong>Fáza:</strong> Prvá stopa</p>
+
+                                        <button class="secondary-button" type="button">
+    Upraviť informáciu
+</button>
+                                    </div>
+                                </details>
+
+                                <details class="material-item">
+                                    <summary>Zisti, kto má kľúč</summary>
+
+                                    <div class="item-description">
+                                        <p>
+Zisti, kto má kľúč od pivnice,
+                                            bez prezradenia svojho zámeru.
+                                        </p>
+
+                                        <p><strong>Typ:</strong> Úloha</p>
+                                        <p><strong>Postava:</strong> Red</p>
+                                        <p><strong>Fáza:</strong> Úvod</p>
+
+                                        <button class="secondary-button" type="button">
+    Upraviť úlohu
+</button>
+                                    </div>
+                                </details>
+                            </div>
+                        </details>
+
+                        <details class="material">
+                            <summary>Dôkazy</summary>
+
+                            <div class="material-content">
+                                <details class="material-item">
+                                    <summary>Roztrhnutý list</summary>
+
+                                    <div class="item-description">
+                                        <p>
+Pri krbe sa našla časť listu
+                                            s neúplným odkazom pre Janku.
+                                        </p>
+
+                                        <p><strong>Postavy:</strong> Green, Blue</p>
+                                        <p><strong>Fáza:</strong> Prvá stopa</p>
+
+                                        <button class="secondary-button" type="button">
+    Upraviť dôkaz
+</button>
+                                    </div>
+                                </details>
+
+                                <details class="material-item">
+                                    <summary>Kľúč od pivnice</summary>
+
+                                    <div class="item-description">
+                                        <p>
+Starý kovový kľúč nájdený
+                                            pod kreslom v spoločenskej miestnosti.
+                                        </p>
+
+                                        <p><strong>Postava:</strong> Red</p>
+                                        <p><strong>Fáza:</strong> Odhalenie</p>
+
+                                        <button class="secondary-button" type="button">
+    Upraviť dôkaz
+</button>
+                                    </div>
+                                </details>
+                            </div>
+                        </details>
+
+                        <details class="material">
+                            <summary>Pomôcky</summary>
+
+                            <div class="material-content">
+                                <details class="material-item">
+                                    <summary>Mapa chaty</summary>
+
+                                    <div class="item-description">
+                                        <p>
+Vytlačený plán miestností
+                                            s vyznačenou pivnicou.
+                                        </p>
+
+                                        <p><strong>Počet:</strong> 1 kus</p>
+
+                                        <button class="secondary-button" type="button">
+    Upraviť pomôcku
+</button>
+                                    </div>
+                                </details>
+
+                                <details class="material-item">
+                                    <summary>Menovky postáv</summary>
+
+                                    <div class="item-description">
+                                        <p>
+Menovky pre Green, Blue, Red
+                                            a Yellow pripravené pred začiatkom hry.
+                                        </p>
+
+                                        <p><strong>Počet:</strong> 4 kusy</p>
+
+                                        <button class="secondary-button" type="button">
+    Upraviť pomôcku
+</button>
+                                    </div>
+                                </details>
+                            </div>
+                        </details>
+
+                        <details class="material">
+                            <summary>Podozrenia</summary>
+
+                            <div class="material-content">
+                                <details class="material-item">
+                                    <summary>Hádka pred zmiznutím</summary>
+
+                                    <div class="item-description">
+                                        <p>
+Red sa pred Jankiným zmiznutím
+                                            s Jankou pohádal. Ostatní počuli
+                                            zvýšené hlasy, ale nepoznajú dôvod.
+                                        </p>
+
+                                        <p><strong>Týka sa postavy:</strong> Red</p>
+
+                                        <button class="secondary-button" type="button">
+    Upraviť podozrenie
+</button>
+                                    </div>
+                                </details>
+                            </div>
+                        </details>
+
+                        <details class="material">
+                            <summary>Prostredie hry</summary>
+
+                            <div class="material-content">
+                                <label for="opis-prostredia">Opis prostredia</label>
+
+                                <textarea
+                                        class="editable-text"
+                                        id="opis-prostredia"
+                                        name="opis-prostredia"
+                                        rows="5"
+                                            >Horská chata so spoločenskou miestnosťou, krbom a zamknutou pivnicou. Za chatou vedie chodník do lesa.</textarea>
+                            </div>
+                        </details>
+
+                        <details class="material">
+                            <summary>Súbory</summary>
+
+                            <div class="material-content">
+                                <p>Zatiaľ neboli priložené žiadne súbory.</p>
+
+                                <label for="priloha">Vybrať prílohu:</label>
+                                <input type="file" id="priloha" name="priloha">
+                            </div>
+                        </details>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="panel" id="todo">
+                <h2>Na dokončenie</h2>
+                <p>2 zo 6 úloh hotové</p>
+
+                <progress value="2" max="6" aria-label="Dokončenie prípravy hry">
+    2 zo 6
+</progress>
+
+                <h3>Základné kroky</h3>
+
+                <div class="todo-list">
+                    <label>
+                        <input type="checkbox" checked>
+Vyplniť základné údaje
+</label>
+
+                    <label>
+                        <input type="checkbox" checked>
+Vytvoriť postavy
+</label>
+
+                    <label>
+                        <input type="checkbox">
+    Priradiť obsah k fázam
+</label>
+
+                    <label>
+                        <input type="checkbox">
+    Skontrolovať export
+</label>
+                </div>
+
+                <h3>Moje úlohy</h3>
+
+                <div class="todo-list">
+                    <label>
+                        <input type="checkbox">
+    Doplniť motív postavy Red
+</label>
+
+                    <label>
+                        <input type="checkbox">
+    Nahrať úvodnú nahrávku
+</label>
+                </div>
+
+                <form class="todo-form">
+                    <label for="nova-uloha">Nová úloha</label>
+
+                    <input
+                            type="text"
+                            id="nova-uloha"
+                            name="nova-uloha"
+                            placeholder="Čo ešte treba urobiť?"
+                                >
+
+                    <button class="button" type="button">
+    + Pridať úlohu
+</button>
+                </form>
+            </aside>
+        </div>
+    </main>
+</div>
