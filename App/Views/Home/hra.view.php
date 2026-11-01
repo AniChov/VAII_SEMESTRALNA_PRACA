@@ -19,7 +19,8 @@
             <a href="<?= $link->url('home.index') ?>">← Späť na projekty</a>
             <a href="<?= $link->url('home.hra') ?>" aria-current="page">
                 Prehľad hry
-            </a>            <a href="#postavy">Postavy</a>
+            </a>            
+            <a href="#postavy">Postavy</a>
             <a href="#pribeh">Príbeh</a>
             <a href="#materialy">Materiály</a>
             <a href="#fazy">Fázy hry</a>
