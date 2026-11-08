@@ -19,7 +19,7 @@ class Configuration
     /**
      * Application name.
      */
-    public const APP_NAME = 'JeToJASne Studio';
+    public const APP_NAME = 'Vaííčko MVC FW';
 
     /**
      * Version of the framework.
