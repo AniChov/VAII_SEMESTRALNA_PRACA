@@ -108,14 +108,14 @@ class HomeController extends BaseController
 
         if ($request->isPost()) {
             $game->setFromRequest($request);
-            $game->game_name = trim($game->game_name);
+            $game->setGameName(trim($game->getGameName()));
 
-            if ($game->game_name === '') {
+            if ($game->getGameName() === '') {
                 $error = 'Zadaj názov hry.';
             } else {
                 $game->save();
 
-                return $this->redirect($this->url('home.game', ['id' => $game->id]));
+                return $this->redirect($this->url('home.game', ['id' => $game->getId()]));
             }
         }
         return $this->html(['game' => $game, 'error' => $error]);
@@ -131,13 +131,13 @@ class HomeController extends BaseController
         $error = null;
         if ($request->isPost()) {
             $game->setFromRequest($request);
-            $game->game_name = trim($game->game_name);
-            if ($game->game_name === '') {
+            $game->setGameName(trim($game->getGameName()));
+            if ($game->getGameName() === '') {
                 $error = 'Zadaj nazov hry.';
             } else {
                 $game->save();
                 return $this->redirect(
-                    $this->url('home.game', ['id' => $game->id])
+                    $this->url('home.game', ['id' => $game->getId()])
                 );
             }
         }

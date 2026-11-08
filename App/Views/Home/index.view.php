@@ -87,26 +87,26 @@
             <div class="games-grid">
             <?php foreach ($games as $game): ?>
                 <article class="game-card-item">
-                <a class="game-card" href="<?= $link->url('home.game', ['id' => $game->id]) ?>">
+                <a class="game-card" href="<?= $link->url('home.game', ['id' => $game->getId()]) ?>">
                     <div class="game-card-cover" aria-hidden="true"></div>
                     <div class="game-card-body">
                     <h3>
                         <?= htmlspecialchars(
-                                $game->game_name,
+                                $game->getGameName(),
                                 ENT_QUOTES,
                                 'UTF-8'
                         ) ?>
                     </h3>
 
                     <p class="game-card-description">
-                        <?= htmlspecialchars($game->description, ENT_QUOTES, 'UTF-8') ?>
+                        <?= htmlspecialchars($game->getDescription(), ENT_QUOTES, 'UTF-8') ?>
                     </p>
                     <span class="game-card-open">Otvoriť hru <span aria-hidden="true">↗</span></span>
                     </div>
                 </a>
                 <div class="game-card-actions">
-                    <a class="game-delete-link" href="<?= $link->url('home.delete_game', ['id' => $game->id]) ?>"
-                       aria-label="<?= htmlspecialchars('Vymazať hru ' . $game->game_name, ENT_QUOTES, 'UTF-8') ?>">Vymazať</a>
+                    <a class="game-delete-link" href="<?= $link->url('home.delete_game', ['id' => $game->getId()]) ?>"
+                       aria-label="<?= htmlspecialchars('Vymazať hru ' . $game->getGameName(), ENT_QUOTES, 'UTF-8') ?>">Vymazať</a>
                 </div>
                 </article>
             <?php endforeach; ?>

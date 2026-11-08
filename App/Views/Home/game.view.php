@@ -24,7 +24,7 @@ $genreNames = [
     <aside class="sidebar">
         <nav aria-label="Navigácia projektu">
             <a href="<?= $link->url('home.index') ?>">← Späť na projekty</a>
-            <a href="<?= $link->url('home.game', ['id' => $game->id]) ?>" aria-current="page">
+            <a href="<?= $link->url('home.game', ['id' => $game->getId()]) ?>" aria-current="page">
                 Prehľad hry
             </a>
             <a href="#postavy">Postavy</a>
@@ -75,10 +75,10 @@ $genreNames = [
         <section class="project-heading">
             <div>
                 <h2>
-                    <?= htmlspecialchars($game->game_name, ENT_QUOTES, 'UTF-8') ?>
+                    <?= htmlspecialchars($game->getGameName(), ENT_QUOTES, 'UTF-8') ?>
                 </h2>
                 <span class="project-status">
-                    <?= $game->status === 'dokoncena'
+                    <?= $game->getStatus() === 'dokoncena'
                     ? 'Dokončená'
                     : 'Rozpracovaná' ?>
                 </span>
@@ -109,19 +109,19 @@ $genreNames = [
                 <h2>Opis hry</h2>
                 <a
                         class="button"
-                        href="<?= $link->url('home.edit_game', ['id' =>$game->id]) ?>">
+                        href="<?= $link->url('home.edit_game', ['id' =>$game->getId()]) ?>">
                     Upraviť údaje
                 </a>
             </div>
             <p>
                 <?= nl2br(htmlspecialchars(
-                        $game->description,
+                        $game->getDescription(),
                         ENT_QUOTES,
                         "UTF-8")) ?>
             </p>
             <dl class="game-details">
                 <dt>Počet hráčov:</dt>
-                <dd><?= (int) $game->player_count ?></dd>
+                <dd><?= (int) $game->getPlayerCount() ?></dd>
 
                 <dt>Predpokladané trvanie:</dt>
                 <dd>120 minút</dd>
@@ -130,7 +130,7 @@ $genreNames = [
                 <dd>Horská chata a okolitý les</dd>
 
                 <dt>Žáner:</dt>
-                <dd><?= htmlspecialchars($genreNames[$game->genre] ?? $game->genre, ENT_QUOTES, 'UTF-8') ?></dd>
+                <dd><?= htmlspecialchars($genreNames[$game->getGenre()] ?? $game->getGenre(), ENT_QUOTES, 'UTF-8') ?></dd>
             </dl>
         </section>
 
