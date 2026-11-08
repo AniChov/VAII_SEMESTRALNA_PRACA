@@ -150,37 +150,76 @@ Rozširujúce funkcie:
 
 ## Aktuálny stav implementácie
 
-Aplikácia využíva PHP framework [Vaííčko](https://github.com/thevajko/vaiicko). Aktuálne je implementované spoločné rozloženie, úvodná stránka, prehlad hier a samostatnej hry. Navigácia medzi stránkami funguje a rozloženie je responzívne.
-Funguje vytváranie, zobrazenie, úprava a vymazanie hier cez ORM, kontrola prázdneho názvu a zachovanie údajov formulára pri chybe.
+Aplikácia využíva PHP framework [Vaííčko](https://github.com/thevajko/vaiicko). Implementované je spoločné rozloženie, funkčná navigácia, responzívny zoznam hier a detail konkrétnej hry.
 
-Prihlasovanie, ukladanie, filtrovanie a export zatiaľ nie sú implementované. Funkcie opísané vyššie predstavujú plán výslednej aplikácie.
+Základné údaje hier sa ukladajú do databázy MariaDB prostredníctvom vstavaného ORM frameworku. Aplikácia umožňuje:
+
+- vytvoriť novú hru,
+- zobraziť zoznam uložených hier a ich detail,
+- upraviť základné údaje existujúcej hry,
+- vymazať hru po potvrdení,
+- skontrolovať prázdny názov pri vytváraní aj úprave,
+- zachovať vyplnené údaje formulára pri validačnej chybe.
+
+Prihlasovanie, funkčné filtrovanie, export a databázová správa postáv, fáz či materiálov zatiaľ nie sú implementované. Tieto časti predstavujú plán ďalšieho rozvoja aplikácie.
 
 ## Štruktúra projektu
 
-- `App/` – kontroléry, pohľady a spoločné rozloženie aplikácie.
+- `App/Controllers/` – spracovanie požiadaviek a CRUD operácií.
+- `App/Models/` – databázové modely využívajúce vstavané ORM.
+- `App/Views/` – pohľady, formuláre a spoločné rozloženie.
 - `Framework/` – zdrojový kód frameworku Vaííčko.
 - `public/` – verejný koreň aplikácie, CSS a ďalšie statické súbory.
 - `docker/` – konfigurácia lokálneho vývojového prostredia.
+- `docker/sql/` – SQL skript na vytvorenie tabuľky hier.
 - `html/` – pôvodná statická HTML a CSS implementácia.
 
 ## Lokálne spustenie cez Docker
 
 1. Nainštalujte a spustite Docker Desktop.
 2. Stiahnite alebo naklonujte repozitár.
-3. V termináli prejdite do koreňového priečinka repozitára.
-4. Spustite webový server:
+3. Overte, že súbor `docker/.env` je vedľa súboru `docker/docker-compose.yml`.
+4. V termináli prejdite do koreňového priečinka repozitára.
+5. Spustite prostredie:
 
    ```bash
    docker compose -f docker/docker-compose.yml up -d
    ```
 
-5. Otvorte aplikáciu na adrese [http://localhost/](http://localhost/).
-6. Prehľad hry otvoríte tlačidlom „Otvoriť ukážku hry“.
+6. Počkajte na dokončenie inicializácie databázy a otvorte [http://localhost/](http://localhost/).
+7. Na stránke „Moje hry“ vytvorte prvú hru tlačidlom „Nová hra“. Kliknutím na jej kartu otvoríte detail. V detaile môžete upraviť základné údaje; vymazanie je dostupné pod kartou hry.
 
-Na zastavenie prostredia použite:
+Príkaz spustí webový server, databázu MariaDB a nástroj Adminer. Adminer je dostupný na adrese [http://localhost:8080/](http://localhost:8080/).
 
-```bash
-docker compose -f docker/docker-compose.yml down
+### Databázová konfigurácia
+
+Súbor `docker/.env` obsahuje spoločné vývojové hodnoty školského prostredia:
+
+```dotenv
+COMPOSE_PROJECT_NAME=vaiicko_fw_v3
+
+MARIADB_ROOT_PASSWORD=dtb456
+MARIADB_DATABASE=vaiicko_db
+MARIADB_USER=vaiicko_user
+MARIADB_PASSWORD=dtb456
 ```
 
-Aktuálna statická verzia aplikácie nevyžaduje databázu. Pri použití iného PHP servera nastavte jeho verejný koreň na priečinok `public`.
+Prístupové údaje aplikácie sú nastavené v `App/Configuration.php`. Pri prihlásení cez Adminer použite server `db`, používateľa `vaiicko_user`, heslo `dtb456` a databázu `vaiicko_db`.
+
+Pri prvom vytvorení databázy Docker automaticky vykoná skript `docker/sql/game_database.sql`, ktorý vytvorí tabuľku `games`. Skript sa pri obyčajnom reštarte už inicializovanej databázy nespúšťa znova.
+
+### Zastavenie prostredia
+
+Na zastavenie kontajnerov bez ich odstránenia použite:
+
+```bash
+docker compose -f docker/docker-compose.yml stop
+```
+
+Opätovne ich spustíte príkazom:
+
+```bash
+docker compose -f docker/docker-compose.yml start
+```
+
+Aktuálna konfigurácia nemá samostatný zväzok na trvalé uchovávanie databázy. Ak kontajnery odstránite cez `docker compose down`, pri ďalšom vytvorení nemusíte mať pôvodné údaje k dispozícii.
