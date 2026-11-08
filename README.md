@@ -150,9 +150,10 @@ Rozširujúce funkcie:
 
 ## Aktuálny stav implementácie
 
-Aplikácia využíva PHP framework [Vaííčko](https://github.com/thevajko/vaiicko). Aktuálne je implementované spoločné rozloženie, úvodná stránka a statický prehľad hry „Vražda na chate“. Navigácia medzi stránkami funguje a rozloženie je responzívne.
+Aplikácia využíva PHP framework [Vaííčko](https://github.com/thevajko/vaiicko). Aktuálne je implementované spoločné rozloženie, úvodná stránka, prehlad hier a samostatnej hry. Navigácia medzi stránkami funguje a rozloženie je responzívne.
+Funguje vytváranie, zobrazenie, úprava a vymazanie hier cez ORM, kontrola prázdneho názvu a zachovanie údajov formulára pri chybe.
 
-Prihlasovanie, databáza, ukladanie, filtrovanie a export zatiaľ nie sú implementované. Funkcie opísané vyššie predstavujú plán výslednej aplikácie.
+Prihlasovanie, ukladanie, filtrovanie a export zatiaľ nie sú implementované. Funkcie opísané vyššie predstavujú plán výslednej aplikácie.
 
 ## Štruktúra projektu
 
@@ -170,7 +171,7 @@ Prihlasovanie, databáza, ukladanie, filtrovanie a export zatiaľ nie sú implem
 4. Spustite webový server:
 
    ```bash
-   docker compose -f docker/docker-compose.yml up -d web
+   docker compose -f docker/docker-compose.yml up -d
    ```
 
 5. Otvorte aplikáciu na adrese [http://localhost/](http://localhost/).
