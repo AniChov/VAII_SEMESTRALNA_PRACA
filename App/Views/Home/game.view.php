@@ -1,6 +1,19 @@
 <?php
 /** @var \Framework\Support\LinkGenerator $link */
 /** @var \App\Models\Game $game */
+/** @var \App\Models\Character[] $characters */
+/** @var $message  */
+
+$playableCharacters = [];
+$npcCharacters = [];
+
+foreach ($characters as $character) {
+    if ($character->getCharacterType() === 'playable') {
+        $playableCharacters[] = $character;
+    } elseif ($character->getCharacterType() === 'npc') {
+        $npcCharacters[] = $character;
+    }
+}
 
 $genreNames = [
 'thriller' => 'Thriller',
@@ -72,6 +85,11 @@ $genreNames = [
     </aside>
 
     <main>
+        <?php if ($message !== null): ?>
+            <p role="status">
+                <?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?>
+            </p>
+        <?php endif; ?>
         <section class="project-heading">
             <div>
                 <h2>
@@ -89,8 +107,19 @@ $genreNames = [
                     <summary>Pridať</summary>
 
                     <div class="add-menu-content">
-                        <a href="#postavy">Postavu</a>
-                        <a href="#npc">NPC postavu</a>
+                        <a href="<?= $link->url('characters.form', [
+                                'game_id' => $game->getId(),
+                                'character_type' => 'playable'
+                        ]) ?>">
+                            Postavu
+                        </a>
+
+                        <a href="<?= $link->url('characters.form', [
+                                'game_id' => $game->getId(),
+                                'character_type' => 'npc'
+                        ]) ?>">
+                            NPC postavu
+                        </a>
                         <a href="#fazy">Fázu hry</a>
                         <a href="#materialy">Informáciu</a>
                         <a href="#materialy">Dôkaz</a>
@@ -174,63 +203,153 @@ Celá hra
 
         <div class="editor-layout">
             <div class="editor-content">
-            <section class="panel" id="postavy">
-                <div class="section-heading">
-                    <h2>Hrateľné postavy (4)</h2>
-                    <button class="button" type="button">+ Postava</button>
-                </div>
+                <section class="panel" id="postavy">
+                    <div class="section-heading">
+                        <h2>
+                            Hrateľné postavy (<?= count($playableCharacters) ?>)
+                        </h2>
 
-                <div class="character-grid">
-                    <article class="character-card">
-                        <div class="character-image" aria-hidden="true">G</div>
+                        <a
+                                class="button"
+                                href="<?= $link->url('characters.form', [
+                                        'game_id' => $game->getId(),
+                                        'character_type' => 'playable'
+                                ]) ?>"
+                        >
+                            + Postava
+                        </a>
+                    </div>
 
-                        <div class="character-content">
-                            <h3>Green</h3>
-                            <p>Pokojný a rozvážny. Snaží sa odhaliť pravdu.</p>                        </div>
-                    </article>
+                    <?php if (empty($playableCharacters)): ?>
+                        <p>Zatiaľ neboli vytvorené žiadne hrateľné postavy.</p>
+                    <?php else: ?>
+                        <div class="character-grid">
+                            <?php foreach ($playableCharacters as $character): ?>
+                                <article class="character-card">
+                                    <div class="character-content">
+                                        <h3>
+                                            <?= htmlspecialchars(
+                                                    $character->getCharacterName(),
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                            ) ?>
+                                        </h3>
 
-                    <article class="character-card">
-                        <div class="character-image" aria-hidden="true">B</div>
+                                        <p>
+                                            <strong>Rola:</strong>
+                                            <?= htmlspecialchars(
+                                                    $character->getRole() ?? '',
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                            ) ?>
+                                        </p>
 
-                        <div class="character-content">
-                            <h3>Blue</h3>
-                            <p>Analytická a pozorná. Všíma si malé detaily.</p>
+                                        <p><?= nl2br(htmlspecialchars(
+                                                    $character->getDescription(),
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                            )) ?></p>
+
+                                        <p>
+                                            <strong>Páchateľ:</strong>
+                                            <?= $character->getIsCulprit() ? 'Áno' : 'Nie' ?>
+                                        </p>
+
+                                        <a
+                                                class="secondary-button"
+                                                href="<?= $link->url('characters.form', [
+                                                        'id' => $character->getId()
+                                                ]) ?>"
+                                        >
+                                            Upraviť
+                                        </a>
+
+                                        <a
+                                                class="secondary-button"
+                                                href="<?= $link->url('characters.delete', [
+                                                        'id' => $character->getId()
+                                                ]) ?>"
+                                        >
+                                            Vymazať
+                                        </a>
+                                    </div>
+                                </article>
+                            <?php endforeach; ?>
                         </div>
-                    </article>
-
-                    <article class="character-card">
-                        <div class="character-image" aria-hidden="true">R</div>
-
-                        <div class="character-content">
-                            <h3>Red</h3>
-                            <p>Impulzívny a emotívny. Koná na prvý dojem.</p>
-                        </div>
-                    </article>
-
-                    <article class="character-card">
-                        <div class="character-image" aria-hidden="true">Y</div>
-
-                        <div class="character-content">
-                            <h3>Yellow</h3>
-                            <p>Spoločenská a zvedavá. Má zmysel pre humor.</p>
-                        </div>
-                    </article>
-                </div>
-            </section>
+                    <?php endif; ?>
+                </section>
 
             <div class="two-columns">
                 <section class="panel" id="npc">
                     <div class="section-heading">
-                        <h2>NPC postavy (1)</h2>
-                        <button class="button" type="button">+ NPC</button>
+                        <h2>NPC postavy (<?= count($npcCharacters) ?>)</h2>
+
+                        <a
+                                class="button"
+                                href="<?= $link->url('characters.form', [
+                                        'game_id' => $game->getId(),
+                                        'character_type' => 'npc'
+                                ]) ?>"
+                        >
+                            + NPC
+                        </a>
                     </div>
 
-                    <h3>Janka</h3>
-                    <p>Organizátorka výletu a sestra Yellow.</p>
+                    <?php if (empty($npcCharacters)): ?>
+                        <p>Zatiaľ neboli vytvorené žiadne NPC postavy.</p>
+                    <?php else: ?>
+                        <?php foreach ($npcCharacters as $character): ?>
+                            <article>
+                                <h3>
+                                    <?= htmlspecialchars(
+                                            $character->getCharacterName(),
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                    ) ?>
+                                </h3>
 
-                    <button class="secondary-button" type="button">
-    Upraviť postavu
-</button>
+                                <p>
+                                    <strong>Rola:</strong>
+                                    <?= htmlspecialchars(
+                                            $character->getRole() ?? '',
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                    ) ?>
+                                </p>
+
+                                <p><?= nl2br(htmlspecialchars(
+                                            $character->getDescription(),
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                    )) ?></p>
+
+                                <p>
+                                    <strong>Páchateľ:</strong>
+                                    <?= $character->getIsCulprit() ? 'Áno' : 'Nie' ?>
+                                </p>
+
+                                <div class="character-actions">
+                                    <a
+                                            class="secondary-button"
+                                            href="<?= $link->url('characters.form', [
+                                                    'id' => $character->getId()
+                                            ]) ?>"
+                                    >
+                                        Upraviť
+                                    </a>
+
+                                    <a
+                                            class="secondary-button"
+                                            href="<?= $link->url('characters.delete', [
+                                                    'id' => $character->getId()
+                                            ]) ?>"
+                                    >
+                                        Vymazať
+                                    </a>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </section>
 
                 <section class="panel" id="hostitel">

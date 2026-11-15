@@ -716,6 +716,60 @@ button, input, select, textarea {
     grid-template-columns: minmax(0, 1fr);
 }
 
+.character-card {
+    height: auto;
+    min-width: 0;
+}
+
+.character-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.character-content h3,
+.character-content p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.character-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 8px;
+}
+
+.character-actions .secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: static;
+    margin: 0;
+    padding: 8px 12px;
+    line-height: 1.4;
+}
+
+.game-form-field .culprit-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.game-form-field .culprit-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    margin: 0;
+    padding: 0;
+}
+
 @media (max-width: 1200px) {
     .editor-layout {
         grid-template-columns: minmax(0, 1fr);
@@ -834,7 +888,11 @@ p.page-eyebrow { margin: 0; color: var(--primary-color); font-size: 12px; font-w
 @media (min-width: 701px) and (max-width: 1000px) { .games-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .games-grid { grid-template-columns: minmax(0, 1fr); } .games-heading { flex-wrap: wrap; } }
 
-
+@media (max-width: 600px) {
+    .character-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
 /* Vymazanie hry ostáva oddelené od odkazu na otvorenie karty. */
 .game-card-item { min-width: 0; }
 .game-card-actions { display: flex; justify-content: flex-end; padding: 12px 4px 0; }

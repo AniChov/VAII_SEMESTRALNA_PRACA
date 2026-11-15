@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Game;
+use App\Models\Character;
 use Framework\Core\BaseController;
 use Framework\Http\Request;
 use Framework\Http\Responses\Response;
@@ -168,8 +169,17 @@ class HomeController extends BaseController
             return $this->redirect($this->url('home.index'));
         }
 
+        $session = $this->app->getSession();
+        $message = $session->get('character_message');
+        $session->set('character_message', null);
+
         return $this->html([
-            'game' => $game
+            'game' => $game,
+            'characters' => Character::getAll(
+                'game_id = ?',
+                [$game->getId()]
+            ),
+            'message' => $message
         ]);
     }
 }
