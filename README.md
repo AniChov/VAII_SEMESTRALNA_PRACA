@@ -148,7 +148,7 @@ Rozširujúce funkcie:
    - spolupráca viacerých autorov: Pozývanie ďalších používateľov k projektu s oprávnením na úpravu alebo iba prezeranie obsahu.
    - komentáre a história zmien: Zaznamenávanie poznámok a zmien v hernom scenári.
 
-##Aktuálny stav implementácie
+## Aktuálny stav implementácie
 Aplikácia využíva PHP framework Vaííčko a databázu MariaDB. Dodržiava architektúru MVC a na databázové operácie používa vstavané ORM frameworku. Implementované je spoločné rozloženie stránok, navigácia, responzívny zoznam hier a detail konkrétnej hry.
 
 Správa hier umožňuje:
