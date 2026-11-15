@@ -148,20 +148,25 @@ Rozširujúce funkcie:
    - spolupráca viacerých autorov: Pozývanie ďalších používateľov k projektu s oprávnením na úpravu alebo iba prezeranie obsahu.
    - komentáre a história zmien: Zaznamenávanie poznámok a zmien v hernom scenári.
 
-## Aktuálny stav implementácie
+##Aktuálny stav implementácie
+Aplikácia využíva PHP framework Vaííčko a databázu MariaDB. Dodržiava architektúru MVC a na databázové operácie používa vstavané ORM frameworku. Implementované je spoločné rozloženie stránok, navigácia, responzívny zoznam hier a detail konkrétnej hry.
 
-Aplikácia využíva PHP framework [Vaííčko](https://github.com/thevajko/vaiicko). Implementované je spoločné rozloženie, funkčná navigácia, responzívny zoznam hier a detail konkrétnej hry.
-
-Základné údaje hier sa ukladajú do databázy MariaDB prostredníctvom vstavaného ORM frameworku. Aplikácia umožňuje:
-
+Správa hier umožňuje:
 - vytvoriť novú hru,
-- zobraziť zoznam uložených hier a ich detail,
-- upraviť základné údaje existujúcej hry,
+- zobraziť zoznam hier a ich detail,
+- upraviť základné údaje hry,
 - vymazať hru po potvrdení,
-- skontrolovať prázdny názov pri vytváraní aj úprave,
-- zachovať vyplnené údaje formulára pri validačnej chybe.
+- overiť vyplnenie názvu a zachovať zadané údaje pri validačnej chybe.
+Správa postáv umožňuje:
+- vytvoriť postavu a priradiť ju k existujúcej hre,
+- zobraziť postavy v detaile príslušnej hry,
+- upraviť údaje postavy vrátane jej priradenia k inej hre,
+- vymazať postavu po potvrdení,
+- rozlíšiť hrateľné postavy a nehrateľné postavy (NPC),
+- označiť postavu ako páchateľa.
+Hry a postavy sú prepojené vzťahom 1:N: jedna hra môže obsahovať viacero postáv, pričom každá postava patrí práve jednej hre. Vzťah je zabezpečený cudzím kľúčom. Pri vymazaní hry sa automaticky vymažú aj jej postavy.
 
-Prihlasovanie, funkčné filtrovanie, export a databázová správa postáv, fáz či materiálov zatiaľ nie sú implementované. Tieto časti predstavujú plán ďalšieho rozvoja aplikácie.
+Prihlasovanie používateľov, funkčné filtrovanie, export a databázová správa fáz či materiálov zatiaľ nie sú implementované a zostávajú súčasťou plánovaného rozvoja aplikácie.
 
 ## Štruktúra projektu
 
